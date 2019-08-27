@@ -54,16 +54,12 @@ def main(stdscr):
         stdscr.addstr(5,0,"Press q to quit.")
 
         sec = datetime.now().second
-        if sec == 60:
-            sec = 0
-            minute += 1
+        minute = datetime.now().minute
+        hour = datetime.now().hour
+
         if minute == 60:
-            minute = 0
-            hour += 1
             for h in hour:
                 curses.flash()
-        if hour == 24:
-            hour = 0
 
         # Wait 1/100 of a second. 
         sleep(0.01)
