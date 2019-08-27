@@ -53,13 +53,16 @@ def main(stdscr):
         stdscr.addstr(4,0, f"Time:[{dhour}:{dminute}:{dsec}]")
         stdscr.addstr(5,0,"Press q to quit.")
 
+        # Use time from the server.
         sec = datetime.now().second
         minute = datetime.now().minute
         hour = datetime.now().hour
 
+        # Got chime?
         if minute == 60:
             for h in hour:
                 curses.flash()
+                sleep(0.1) #  wait for a brief moment.
 
         # Wait 1/100 of a second. 
         sleep(0.01)
