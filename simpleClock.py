@@ -25,8 +25,8 @@ def main(stdscr):
     while True:
         c = stdscr.getch()
         curses.flushinp()
-        stdscr.clear()
-        # Press q to exit
+        stdscr.erase() #  Deal with the flicker on the screen.
+        # Press q to exit.
         if c == ord('q'):
             break
         # Draw Clock bars to the screen.
@@ -60,14 +60,15 @@ def main(stdscr):
             lasMin = True
         hour = datetime.now().hour
 
-        # Got chime?
+        #  Got chime?
         if minute == 0:
             if lasMin:
                 for h in range(0, hour):
                     curses.flash()
-                    sleep(0.1) #  wait for a brief moment.
+                    sleep(0.1) #  Wait for a brief moment.
                 lasMin = False
 
+        stdscr.refresh() #  Refresh only the parts that change on screen.
         # Wait 1/100 of a second. 
         sleep(0.01)
 
