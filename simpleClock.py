@@ -56,13 +56,17 @@ def main(stdscr):
         # Use time from the server.
         sec = datetime.now().second
         minute = datetime.now().minute
+        if minute == 59:
+            lasMin = True
         hour = datetime.now().hour
 
         # Got chime?
-        if minute == 60:
-            for h in hour:
-                curses.flash()
-                sleep(0.1) #  wait for a brief moment.
+        if minute == 0:
+            if lasMin:
+                for h in range(0, hour):
+                    curses.flash()
+                    sleep(0.1) #  wait for a brief moment.
+                lasMin = False
 
         # Wait 1/100 of a second. 
         sleep(0.01)
